@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "tasks": [
+    {
+      "type": "npm",
+      "label": "Start Webpack Dev",
+      "script": "start:renderer",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "____________"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Compiling\\.\\.\\.$",
+          "endsPattern": "(Compiled successfully|Failed to compile)\\.$"
+        }
+      }
+    }
+  ]
+}
