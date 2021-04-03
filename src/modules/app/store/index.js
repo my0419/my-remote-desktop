@@ -6,6 +6,7 @@ const initialState = {
 
   serverSelected: null,
   servers: [],
+  soft: [],
 }
 
 const reducers = (state,action) => {
@@ -26,6 +27,11 @@ const reducers = (state,action) => {
           return s.id === state.serverSelected.id
         }).shift() : null
         return {...state, ...{servers: action.payload.data, serverSelected: updateSelected}}
+      }
+      return state
+    case "SOFT_LIST":
+      if (action.payload !== null) {
+        return {...state, ...{soft: action.payload.data}}
       }
       return state
     case "SERVER_SELECTED":

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import { Form, Input, Modal, Button, Select, message } from "antd";
+import { Form, Input, Modal, Button, Select, Checkbox, Row, Col, message } from "antd";
 const { Option } = Select;
 
 import { PlusCircleOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { useMutate } from "restful-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ButtonGreenContainer = styled.div`
   .ant-btn-primary {
@@ -29,6 +29,34 @@ export default function Create() {
     verb: "POST",
     path: "/server"
   });
+
+  const { mutate: requestListSoft, loadingSoft } = useMutate({
+    verb: "GET",
+    path: "/soft"
+  });
+
+  React.useEffect(() => {
+    requestListSoft().then(res => {
+      dispatch({ type: "SOFT_LIST", payload: res })
+    })
+
+  }, [])
+
+  const stateValues = useSelector((state) => {
+    return {
+      soft: state.soft,
+    }
+  });
+
+  const { soft } = stateValues
+  soft.map((item) => {
+    try {
+      item.icon = require(`@img/soft/${item.code}.svg`).default
+    } catch (e) {
+      item.icon = null
+    }
+    return item
+  })
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -65,6 +93,18 @@ export default function Create() {
             }
             ]}>
             <Input size="large" />
+          </Form.Item>
+          <Form.Item label="Предустановленное ПО" name="soft_install" >
+
+            <Checkbox.Group style={{ width: '100%' }} >
+              <Row>
+                {soft.map((val) => (
+                  <Col span={8}>
+                     <Checkbox value={val.id}>{val.icon ? <img src={val.icon} width={18} /> : ''} { val.name }</Checkbox>
+                  </Col>
+                ))}
+              </Row>
+            </Checkbox.Group>
           </Form.Item>
           <Form.Item label="Операционная система" >
             <Select

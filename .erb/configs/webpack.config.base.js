@@ -37,6 +37,7 @@ export default {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {
       '@modules': path.resolve(__dirname, '../../src/modules'),
+      '@img': path.resolve(__dirname, '../../src/img'),
       '@lib': path.resolve(__dirname, '../../src/lib'),
     },
     modules: [path.join(__dirname, '../src'), 'node_modules'],
