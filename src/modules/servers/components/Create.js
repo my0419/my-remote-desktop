@@ -3,19 +3,14 @@ import React, { useState } from 'react';
 import { Form, Input, Modal, Button, Select, Checkbox, Row, Col, message } from "antd";
 const { Option } = Select;
 
-import { PlusCircleOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { useMutate } from "restful-react";
 import { useDispatch, useSelector } from "react-redux";
 
-const ButtonGreenContainer = styled.div`
-  .ant-btn-primary {
-    margin-top: 5px;
-    background-color: #52c41a;
-    border-color: #73d13d;
-    border-radius: 0;
-    &:hover {
-     background-color: #389e0d;
+const ButtonCreateContainer = styled.div`
+  .ant-btn-link {
+    font-weight: bold;
   }
 `;
 
@@ -35,21 +30,30 @@ export default function Create() {
     path: "/soft"
   });
 
+  const { mutate: requestListRegion, loadingRegion } = useMutate({
+    verb: "GET",
+    path: "/region"
+  });
+
   React.useEffect(() => {
     requestListSoft().then(res => {
       dispatch({ type: "SOFT_LIST", payload: res })
+    })
+    requestListRegion().then(res => {
+      dispatch({ type: "REGION_LIST", payload: res })
     })
 
   }, [])
 
   const stateValues = useSelector((state) => {
     return {
-      soft: state.soft,
+      softs: state.softs,
+      regions: state.regions,
     }
   });
 
-  const { soft } = stateValues
-  soft.map((item) => {
+  const { softs, regions } = stateValues
+  softs.map((item) => {
     try {
       item.icon = require(`@img/soft/${item.code}.svg`).default
     } catch (e) {
@@ -98,13 +102,20 @@ export default function Create() {
 
             <Checkbox.Group style={{ width: '100%' }} >
               <Row>
-                {soft.map((val) => (
+                {softs.map((val) => (
                   <Col span={8}>
                      <Checkbox value={val.id}>{val.icon ? <img src={val.icon} width={18} /> : ''} { val.name }</Checkbox>
                   </Col>
                 ))}
               </Row>
             </Checkbox.Group>
+          </Form.Item>
+          <Form.Item label="Регион" name="region" rules={[{ required: true, message: 'Регион не может быть пустым' }]}>
+            <Select placeholder="Выберите регион" size="large">
+              {regions.map((val) => (
+                <Option key={val.id} value={val.id}>{val.name}</Option>
+              ))}
+            </Select>
           </Form.Item>
           <Form.Item label="Операционная система" >
             <Select
@@ -116,16 +127,6 @@ export default function Create() {
               <Option value="windows">Windows Server 2019 Base 10 (Ver. 2021.02.10)</Option>
             </Select>
           </Form.Item>
-          <Form.Item label="Регион" >
-            <Select
-              labelInValue
-              disabled
-              size="large"
-              defaultValue={{ value: 'frankfurt' }}
-            >
-              <Option value="frankfurt">Europe (Frankfurt)</Option>
-            </Select>
-          </Form.Item>
           <Form.Item>
             <Button loading={loading} type="primary" htmlType="submit" size="large">
               Создать сервер
@@ -133,11 +134,11 @@ export default function Create() {
           </Form.Item>
         </Form>
       </Modal>
-      <ButtonGreenContainer>
-        <Button icon={<PlusCircleOutlined />} type="primary" size="large" onClick={showModal} block>
-          Создать сервер
+      <ButtonCreateContainer>
+        <Button icon={<PlusSquareOutlined />} type="link" size="large" onClick={showModal} block>
+          Создать новый сервер
         </Button>
-      </ButtonGreenContainer>
+      </ButtonCreateContainer>
     </>
   )
 }

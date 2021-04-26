@@ -9,7 +9,6 @@ const LogoImage = styled.img`
 `
 const LogoText = styled.div`
   font-size: 20px;
-  color: #00597c;
 `
 
 const CardHead = styled.div`

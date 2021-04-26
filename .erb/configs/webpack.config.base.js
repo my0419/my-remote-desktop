@@ -12,6 +12,25 @@ export default {
   module: {
     rules: [
       {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              },
+            },
+          }
+        ]
+      },
+      {
         test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {

@@ -22,14 +22,13 @@ const PreloaderContainer = styled.div`
 const ListItemContainer = styled.div`
   .ant-list-item {
     ${props => props.active && css`
-      border-right: 4px solid #40a9ff;
-      background-color: #f3f9ff;
+      border-right: 4px solid #4a4a4a;
 
    `}
     cursor: pointer;
-    border-bottom: 1px solid #ddd !important;
+    border-bottom: 1px solid #232323 !important;
     &:hover {
-      background-color: #f3f9ff;
+      background-color: #2d2d2d;
     }
   }
 `

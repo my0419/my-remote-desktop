@@ -35,7 +35,7 @@ export default function Servers() {
   }
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ height: "100%", paddingTop: "24px" }}>
       <Header style={{padding: 0}}>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" icon={<DesktopOutlined />} style={{width: 250, textAlign: 'center'}} >Рабочие столы</Menu.Item>
@@ -46,7 +46,6 @@ export default function Servers() {
       </Header>
       <Layout>
         <Sider width={250} style={{
-          background: '#fff',
           overflow: 'auto',
           left: 0}}>
           <List />

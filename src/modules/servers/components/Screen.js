@@ -149,11 +149,11 @@ class Screen extends React.Component {
 
     const context = convasElement.getContext('2d');
 
-    convasElement.width = window.innerWidth - 250; // 250px - left side
+    convasElement.width = window.innerWidth - 255; // 250px - left side
     if (convasElement.width < 600) {
       convasElement.width = 600;
     }
-    convasElement.height = window.innerHeight - 64;
+    convasElement.height = window.innerHeight - 90;
     context.clearRect(0, 0, convasElement.width, convasElement.height);
     convasElement.style.opacity = 1
 

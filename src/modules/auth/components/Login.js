@@ -35,12 +35,12 @@ export default function Login() {
       <Form.Item name="email" rules={[{ required: true, message: 'Не может быть пустым' }]}>
         <Input
           size="large"
-          prefix={<UserOutlined className="site-form-item-icon" style={{color: 'rgba(0, 0, 0, 0.25)'}} />}
+          prefix={<UserOutlined className="site-form-item-icon" style={{color: '#f68031'}} />}
           placeholder="Email"
         />
       </Form.Item>
       <Form.Item name="password" rules={[{ required: true, message: 'Не может быть пустым' }]}>
-        <Input.Password size="large" prefix={<LockOutlined className="site-form-item-icon" style={{color: 'rgba(0, 0, 0, 0.25)'}} />} placeholder="Пароль" />
+        <Input.Password size="large" prefix={<LockOutlined className="site-form-item-icon" style={{color: '#f68031'}} />} placeholder="Пароль" />
       </Form.Item>
       <Form.Item>
         <Button loading={loading} type="primary" htmlType="submit" size="large" block>

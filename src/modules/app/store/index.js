@@ -6,7 +6,8 @@ const initialState = {
 
   serverSelected: null,
   servers: [],
-  soft: [],
+  softs: [],
+  regions: [],
 }
 
 const reducers = (state,action) => {
@@ -31,7 +32,12 @@ const reducers = (state,action) => {
       return state
     case "SOFT_LIST":
       if (action.payload !== null) {
-        return {...state, ...{soft: action.payload.data}}
+        return {...state, ...{softs: action.payload.data}}
+      }
+      return state
+    case "REGION_LIST":
+      if (action.payload !== null) {
+        return {...state, ...{regions: action.payload.data}}
       }
       return state
     case "SERVER_SELECTED":
